@@ -39,7 +39,6 @@ Assuming you're using https://github.com/google/protobuf-gradle-plugin :
       }
     }
   }
-}
 ...
 ```
 
