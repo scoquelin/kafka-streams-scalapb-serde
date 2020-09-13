@@ -17,7 +17,7 @@ lazy val root = project
   .settings(
       name := "kafka-streams-scalapb-serde",
       organization := "com.github.scoquelin",
-      scalaVersion := "2.12.10",
+      scalaVersion := "2.13.3",
       crossScalaVersions := List("2.12.10", "2.13.3"),
       scalacOptions += "-deprecation"
   )
