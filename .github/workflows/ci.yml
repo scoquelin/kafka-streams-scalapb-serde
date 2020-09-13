@@ -8,4 +8,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: olafurpg/setup-scala@v2
-    - run: sbt test
+    - uses: coursier/cache-action@v3
+    - run: csbt clean coverage test coverageReport
+    - run: bash <(curl -s https://codecov.io/bash)
