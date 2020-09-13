@@ -6,7 +6,7 @@ inThisBuild(List(
     Developer(
       "scoquelin",
       "Sébastien Coquelin",
-      "seb dot coquelin at gmail dot com",
+      "seb.coquelin@gmail.com",
       url("https://www.github.com/scoquelin")
     )
   )
