@@ -1,4 +1,5 @@
 ![CI](https://github.com/scoquelin/kafka-streams-scalapb-serde/workflows/CI/badge.svg?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.scoquelin/kafka-streams-scalapb-serde_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.scoquelin/kafka-streams-scalapb-serde_2.13)
 [![codecov](https://codecov.io/gh/scoquelin/kafka-streams-scalapb-serde/branch/master/graph/badge.svg)](https://codecov.io/gh/scoquelin/kafka-streams-scalapb-serde)
 
 # Context
