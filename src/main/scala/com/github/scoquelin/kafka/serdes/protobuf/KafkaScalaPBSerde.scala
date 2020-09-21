@@ -5,21 +5,17 @@ import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient
 import org.apache.kafka.common.serialization.{Deserializer, Serde, Serdes, Serializer}
 import scalapb.{GeneratedMessage, GeneratedMessageCompanion, JavaProtoSupport}
 
-class KafkaScalaPBSerde[ScalaPB <: GeneratedMessage, JavaPB <: com.google.protobuf.Message] extends Serde[ScalaPB] {
+class KafkaScalaPBSerde[ScalaPB <: GeneratedMessage, JavaPB <: com.google.protobuf.Message](
+  companion: GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB]) extends Serde[ScalaPB] {
 
-  var inner : Serde[ScalaPB] = _
-
-  def this(companion : GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB]) = {
-    this()
-    inner = Serdes.serdeFrom(
+  var inner : Serde[ScalaPB] = Serdes.serdeFrom(
       new KafkaScalaPBSerializer[ScalaPB, JavaPB](companion),
       new KafkaScalaPBDeserializer[ScalaPB, JavaPB](companion)
     )
-  }
 
-  def this(companion : GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB],
+  def this(companion: GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB],
            client: SchemaRegistryClient) = {
-    this()
+    this(companion)
     inner = Serdes.serdeFrom(
       new KafkaScalaPBSerializer[ScalaPB, JavaPB](companion, client),
       new KafkaScalaPBDeserializer[ScalaPB, JavaPB](companion, client)
@@ -30,7 +26,7 @@ class KafkaScalaPBSerde[ScalaPB <: GeneratedMessage, JavaPB <: com.google.protob
            client: SchemaRegistryClient,
            props: java.util.Map[String, _],
            classType: Class[JavaPB]) = {
-    this()
+    this(companion)
     inner = Serdes.serdeFrom(
       new KafkaScalaPBSerializer[ScalaPB, JavaPB](companion, client, props),
       new KafkaScalaPBDeserializer[ScalaPB, JavaPB](companion, client, props, classType)

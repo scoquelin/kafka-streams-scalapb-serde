@@ -5,30 +5,22 @@ import io.confluent.kafka.serializers.protobuf.{AbstractKafkaProtobufSerializer,
 import org.apache.kafka.common.serialization.Serializer
 import scalapb.{GeneratedMessage, GeneratedMessageCompanion, JavaProtoSupport}
 
-class KafkaScalaPBSerializer[ScalaPB <: GeneratedMessage, JavaPB <: com.google.protobuf.Message]
+class KafkaScalaPBSerializer[ScalaPB <: GeneratedMessage, JavaPB <: com.google.protobuf.Message](
+  companion: GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB])
   extends AbstractKafkaProtobufSerializer[JavaPB] with Serializer[ScalaPB] {
 
-  var companion: GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB] = _
-  var kafkaProtobufSerializer: KafkaProtobufSerializer[JavaPB] = _
-
-  def this(companion: GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB]) = {
-    this()
-    this.companion = companion
-    this.kafkaProtobufSerializer = new KafkaProtobufSerializer[JavaPB]()
-  }
+  var kafkaProtobufSerializer: KafkaProtobufSerializer[JavaPB] = new KafkaProtobufSerializer[JavaPB]()
 
   def this(companion: GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB],
            client: SchemaRegistryClient) = {
-    this()
-    this.companion = companion
+    this(companion)
     this.kafkaProtobufSerializer = new KafkaProtobufSerializer[JavaPB](client)
   }
 
   def this(companion: GeneratedMessageCompanion[ScalaPB] with JavaProtoSupport[ScalaPB, JavaPB],
            client: SchemaRegistryClient,
            props: java.util.Map[String, _]) = {
-    this()
-    this.companion = companion
+    this(companion)
     this.kafkaProtobufSerializer = new KafkaProtobufSerializer[JavaPB](client, props)
   }
 
