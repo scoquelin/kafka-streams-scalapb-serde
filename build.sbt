@@ -18,7 +18,7 @@ lazy val root = project
       name := "kafka-streams-scalapb-serde",
       organization := "com.github.scoquelin",
       scalaVersion := "2.13.3",
-      crossScalaVersions := List("2.12.10", "2.13.3"),
+      crossScalaVersions := List("2.12.15", "2.13.7"),
       scalacOptions += "-deprecation"
   )
 
@@ -26,8 +26,8 @@ resolvers += "confluent" at "https://packages.confluent.io/maven/"
 
 libraryDependencies ++= Seq(
     "com.thesamet.scalapb" %% "scalapb-runtime"              % scalapb.compiler.Version.scalapbVersion % "protobuf",
-    "io.confluent"          % "kafka-streams-protobuf-serde" % "5.5.1",
-    "org.scalatest"        %% "scalatest"                    % "3.2.0"  % Test
+    "io.confluent"          % "kafka-streams-protobuf-serde" % "6.0.2",
+    "org.scalatest"        %% "scalatest"                    % "3.2.9"  % Test
 )
 
 PB.targets in Compile := Seq(
